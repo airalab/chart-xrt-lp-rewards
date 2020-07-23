@@ -1,0 +1,83 @@
+<template>
+  <div class="small">
+    <highcharts :options="options" ref="chart"></highcharts>
+  </div>
+</template>
+
+<script>
+export default {
+  props: ["log", "staked"],
+  data() {
+    return {
+      datacollection: null,
+      options: {
+        title: false,
+        chart: {
+          type: "spline",
+          height: 500,
+        },
+        xAxis: {
+          title: {
+            text: "staked",
+          },
+        },
+        yAxis: {
+          title: {
+            text: "reward",
+          },
+        },
+        tooltip: {
+          shared: true,
+          crosshairs: true,
+          formatter: function () {
+            return (
+              "<b>staked</b> = " +
+              this.x +
+              " XRT<br /><b>reward</b> = " +
+              this.y +
+              " XRT<br />"
+            );
+          },
+        },
+        series: [],
+      },
+    };
+  },
+  mounted() {
+    this.fillData();
+  },
+  watch: {
+    log: function () {
+      this.fillData();
+    },
+  },
+  methods: {
+    fillData() {
+      const series = [
+        {
+          name: "reward",
+          color: "#e8b738",
+          lineWidth: 1,
+          data: this.log,
+        },
+        {
+          name: "staked",
+          color: "#3784d2",
+          lineWidth: 1,
+          marker: { radius: 8 },
+          data: this.staked,
+        },
+      ];
+      this.options.series = series;
+    },
+  },
+};
+</script>
+
+<style>
+.small {
+  max-width: 1024px;
+  height: 500px;
+  margin: 0 auto;
+}
+</style>

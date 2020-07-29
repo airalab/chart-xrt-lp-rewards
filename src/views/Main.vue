@@ -108,8 +108,8 @@ button {
 }
 .btn-red {
   display: block;
-  background-color: #a22323;
-  border: 1px solid #882b2b;
+  background-color: #2e9a21;
+  border: 1px solid #478a43;
   width: 300px;
   color: blanchedalmond;
   margin: 0 auto;
@@ -117,7 +117,7 @@ button {
   text-decoration: none;
 }
 .btn-red:hover {
-  background-color: #d83131;
-  border: 1px solid #d83131;
+  background-color: #44713f;
+  border: 1px solid #478a43;
 }
 </style>

@@ -5,19 +5,13 @@
     <div class="tb">
       <div class="row">
         <div class="col">Total staked</div>
-        <div>
-          <input v-model="staked" /> XRT
-        </div>
+        <div class="col-left">{{staked}} XRT</div>
       </div>
       <div class="row">
         <div class="col">Real-time circulation</div>
-        <div>
-          <input v-model="total" /> XRT
-        </div>
+        <div class="col-left">{{total}} XRT</div>
       </div>
     </div>
-    <button @click="draw">Draw</button>
-    <br />
     <h2>Why stake?</h2>
     <p>25% year emission</p>
     <p>50% targeted active staking</p>
@@ -95,17 +89,35 @@ export default {
 }
 .tb .row {
   margin: 10px;
+  overflow: hidden;
 }
 .tb .col {
   float: left;
   width: 50%;
   text-align: right;
 }
+.tb .col-left {
+  text-align: left;
+  padding-left: 20px;
+  font-weight: bold;
+  float: left;
+}
 button {
   font-size: 20px;
   padding: 10px;
 }
 .btn-red {
-  color: brown;
+  display: block;
+  background-color: #a22323;
+  border: 1px solid #882b2b;
+  width: 300px;
+  color: blanchedalmond;
+  margin: 0 auto;
+  padding: 10px;
+  text-decoration: none;
+}
+.btn-red:hover {
+  background-color: #d83131;
+  border: 1px solid #d83131;
 }
 </style>

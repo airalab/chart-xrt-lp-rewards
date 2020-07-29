@@ -18,12 +18,13 @@ export default {
         },
         xAxis: {
           title: {
-            text: "total staked",
+            text: "Total staked",
           },
         },
         yAxis: {
           title: {
-            text: "collective weekly reward",
+            text:
+              "Weekly reward for each 1% in XRT/ETH liquidity pool on Uniswap",
           },
         },
         tooltip: {
@@ -55,14 +56,15 @@ export default {
     fillData() {
       const series = [
         {
-          name: "collective weekly reward",
+          name:
+            "Weekly reward for each 1% in XRT/ETH liquidity pool on Uniswap",
           color: "#e8b738",
           lineWidth: 1,
           marker: { radius: 2 },
           data: this.log,
         },
         {
-          name: "total staked",
+          name: "Total staked",
           color: "#3784d2",
           lineWidth: 1,
           marker: { radius: 8 },

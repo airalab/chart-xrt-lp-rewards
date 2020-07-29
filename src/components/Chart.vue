@@ -35,7 +35,7 @@ export default {
               Math.round(this.x) +
               " XRT<br /><b>reward</b> = " +
               Math.round(this.y) +
-              " XRT<br />"
+              " XRT per week<br />"
             );
           },
         },

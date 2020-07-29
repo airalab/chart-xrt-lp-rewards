@@ -18,12 +18,12 @@ export default {
         },
         xAxis: {
           title: {
-            text: "staked",
+            text: "total staked",
           },
         },
         yAxis: {
           title: {
-            text: "reward",
+            text: "collective weekly reward",
           },
         },
         tooltip: {
@@ -32,9 +32,9 @@ export default {
           formatter: function () {
             return (
               "<b>staked</b> = " +
-              this.x +
+              Math.round(this.x) +
               " XRT<br /><b>reward</b> = " +
-              this.y +
+              Math.round(this.y) +
               " XRT<br />"
             );
           },
@@ -55,14 +55,14 @@ export default {
     fillData() {
       const series = [
         {
-          name: "reward",
+          name: "collective weekly reward",
           color: "#e8b738",
           lineWidth: 1,
           marker: { radius: 2 },
           data: this.log,
         },
         {
-          name: "staked",
+          name: "total staked",
           color: "#3784d2",
           lineWidth: 1,
           marker: { radius: 8 },

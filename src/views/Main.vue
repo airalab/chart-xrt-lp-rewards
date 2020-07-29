@@ -1,15 +1,32 @@
 <template>
   <div>
+    <h1>XRT Liquidity stake reward calc</h1>
     <Chart ref="chart" :log="points" :staked="stakedPoint" />
-    <p>
-      staked
-      <input v-model="staked" /> XRT
-    </p>
-    <p>
-      total
-      <input v-model="total" /> XRT
-    </p>
-    <button @click="draw">draw</button>
+    <div class="tb">
+      <div class="row">
+        <div class="col">Total staked</div>
+        <div>
+          <input v-model="staked" /> XRT
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">Real-time circulation</div>
+        <div>
+          <input v-model="total" /> XRT
+        </div>
+      </div>
+    </div>
+    <button @click="draw">Draw</button>
+    <br />
+    <h2>Why stake?</h2>
+    <p>25% year emission</p>
+    <p>50% targeted active staking</p>
+    <br />
+    <a
+      href="https://app.uniswap.org/#/add/0x7de91b204c1c737bcee6f000aaa6569cf7061cb7/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"
+      target="_blank"
+      class="btn-red"
+    >Add XRT / ETH Liquidity on Uniswap</a>
   </div>
 </template>
 
@@ -70,3 +87,25 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.tb {
+  width: 500px;
+  margin: 40px auto;
+}
+.tb .row {
+  margin: 10px;
+}
+.tb .col {
+  float: left;
+  width: 50%;
+  text-align: right;
+}
+button {
+  font-size: 20px;
+  padding: 10px;
+}
+.btn-red {
+  color: brown;
+}
+</style>

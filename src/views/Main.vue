@@ -21,6 +21,18 @@
       target="_blank"
       class="btn-red"
     >Add XRT / ETH Liquidity on Uniswap</a>
+    <h2>XRT Liquidity events last updates</h2>
+    <div>
+      <p>- XRT Liquidity pool staking event will be continued in August.</p>
+      <p>- The reward will change from the const amount to the weekly reward calculation algorithm.</p>
+      <p>- New XRT Liquidity pool staking reward distribution algorithm similar to Polkadot Inflation (https://wiki.polkadot.network/docs/en/learn-staking#inflation). Depending on the staking participation, the distribution of the emission to liquidity providers will change dynamically to provide incentives to participate (or not participate) in staking.</p>
+      <p>- The ideal stake will be 50% of real-time circulation XRT. For example, now real-time circ is 182,559 XRT and staked 29,114 XRT ~16%.</p>
+      <p>- XRT Inflation is designed to be up to 25% in the first year, and before we launch Robonomics Parachain CC1 emission of XRT will be distributed for XRT Liquidity providers.</p>
+      <p>- Minimal XRT Inflation designed to be 5%. It means the corridor for XRT Liquidity pool staking reward distribution algorithm is 5% - 25% of real-time circulation.</p>
+      <p>- Minimal stake in August will be 0.1% XRT/ETH pool to be rewarded.</p>
+      <p>- Dev team prepared XRT Liquidity stake reward calc (https://vol4tim.github.io/chart-xrt-lp-rewards/#/). This application is a useful tool to get actual data regarding real-time circ, current stake amount and weekly reward estimation.</p>
+      <p>- Dev team will start using XRT Liquidity pool staking reward distribution algorithm next week.</p>
+    </div>
   </div>
 </template>
 

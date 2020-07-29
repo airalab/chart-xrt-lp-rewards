@@ -58,6 +58,7 @@ export default {
           name: "reward",
           color: "#e8b738",
           lineWidth: 1,
+          marker: { radius: 2 },
           data: this.log,
         },
         {

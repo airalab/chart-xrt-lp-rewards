@@ -57,12 +57,13 @@ export default {
       points: [],
       stakedPoint: [],
       staked: "0",
-      total: "182559",
+      total: "0",
     };
   },
   async mounted() {
     await init("xrt_lp_rewards_bg.wasm");
     await this.loadStaked();
+    await this.loadTotal();
     this.draw();
   },
   methods: {
@@ -72,6 +73,27 @@ export default {
       );
       this.staked = Math.round(
         Number(result.data.result) / 1000000000
+      ).toString();
+    },
+    async loadTotal() {
+      const tokensupply = await axios.get(
+        "https://api.etherscan.io/api?module=stats&action=tokensupply&contractaddress=0x7de91b204c1c737bcee6f000aaa6569cf7061cb7&apikey=U6AM52QNQZRTE6P4J8RUH1U5JB3I3SUWIZ"
+      );
+      const dutchAuction = await axios.get(
+        "https://api.etherscan.io/api?module=account&action=tokenbalance&contractaddress=0x7de91b204c1c737bcee6f000aaa6569cf7061cb7&address=0x86da63b3341924c88baa5adbb2b8f930cc02e586&tag=latest&apikey=U6AM52QNQZRTE6P4J8RUH1U5JB3I3SUWIZ"
+      );
+      const DAO = await axios.get(
+        "https://api.etherscan.io/api?module=account&action=tokenbalance&contractaddress=0x7de91b204c1c737bcee6f000aaa6569cf7061cb7&address=0x28a3d3467a3198d1bb5311836036d53c3c64b999&tag=latest&apikey=U6AM52QNQZRTE6P4J8RUH1U5JB3I3SUWIZ"
+      );
+      const publicAmbix = await axios.get(
+        "https://api.etherscan.io/api?module=account&action=tokenbalance&contractaddress=0x7de91b204c1c737bcee6f000aaa6569cf7061cb7&address=0x06d77d039a6bd049fc9e651b7ecbb2694ac1f96f&tag=latest&apikey=U6AM52QNQZRTE6P4J8RUH1U5JB3I3SUWIZ"
+      );
+      this.total = Math.round(
+        (Number(tokensupply.data.result) -
+          Number(dutchAuction.data.result) -
+          Number(DAO.data.result) -
+          Number(publicAmbix.data.result)) /
+          1000000000
       ).toString();
     },
     async draw() {

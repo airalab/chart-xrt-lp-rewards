@@ -5,11 +5,11 @@
     <div class="tb">
       <div class="row">
         <div class="col">Total staked</div>
-        <div class="col-left">{{staked}} XRT</div>
+        <div class="col-left">{{ staked }} XRT</div>
       </div>
       <div class="row">
         <div class="col">Real-time circulation</div>
-        <div class="col-left">{{total}} XRT</div>
+        <div class="col-left">{{ total }} XRT</div>
       </div>
     </div>
     <h2>Why stake?</h2>
@@ -20,33 +20,84 @@
       href="https://app.uniswap.org/#/add/0x7de91b204c1c737bcee6f000aaa6569cf7061cb7/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"
       target="_blank"
       class="btn-red"
-    >Add XRT / ETH Liquidity on Uniswap</a>
+      >Add XRT / ETH Liquidity on Uniswap</a
+    >
     <h2>XRT Liquidity events last updates</h2>
-    <div style="width: 1024px;margin: 0 auto;text-align: left;">
+    <div style="width: 1024px; margin: 0 auto; text-align: left;">
       <ul>
         <li>XRT Liquidity pool staking event will be continued in August.</li>
-        <li>The reward will change from the const amount to the weekly reward calculation algorithm.</li>
         <li>
-          New XRT Liquidity pool staking reward distribution algorithm similar to
+          The reward will change from the const amount to the weekly reward
+          calculation algorithm.
+        </li>
+        <li>
+          New XRT Liquidity pool staking reward distribution algorithm similar
+          to
           <a
             href="https://wiki.polkadot.network/docs/en/learn-staking#inflation"
             target="_blank"
-          >Polkadot Inflation</a>. Depending on the staking participation, the distribution of the emission to liquidity providers will change dynamically to provide incentives to participate (or not participate) in staking.
+            >Polkadot Inflation</a
+          >. Depending on the staking participation, the distribution of the
+          emission to liquidity providers will change dynamically to provide
+          incentives to participate (or not participate) in staking.
         </li>
-        <li>The ideal stake will be 50% of real-time circulation XRT. For example, now real-time circ is 182,559 XRT and staked 29,114 XRT ~16%.</li>
-        <li>XRT Inflation is designed to be up to 25% in the first year, and before we launch Robonomics Parachain CC1 emission of XRT will be distributed for XRT Liquidity providers.</li>
-        <li>Minimal XRT Inflation designed to be 5%. It means the corridor for XRT Liquidity pool staking reward distribution algorithm is 5% - 25% of real-time circulation.</li>
-        <li>Minimal stake in August will be 0.1% XRT/ETH pool to be rewarded.</li>
-        <li>This application is a useful tool to get actual data regarding real-time circ, current stake amount and weekly reward estimation.</li>
+        <li>
+          The ideal stake will be 50% of real-time circulation XRT. For example,
+          now real-time circ is 182,559 XRT and staked 29,114 XRT ~16%.
+        </li>
+        <li>
+          XRT Inflation is designed to be up to 25% in the first year, and
+          before we launch Robonomics Parachain CC1 emission of XRT will be
+          distributed for XRT Liquidity providers.
+        </li>
+        <li>
+          Minimal XRT Inflation designed to be 5%. It means the corridor for XRT
+          Liquidity pool staking reward distribution algorithm is 5% - 25% of
+          real-time circulation.
+        </li>
+        <li>
+          Minimal stake in August will be 0.1% XRT/ETH pool to be rewarded.
+        </li>
+        <li>
+          This application is a useful tool to get actual data regarding
+          real-time circ, current stake amount and weekly reward estimation.
+        </li>
       </ul>
     </div>
   </div>
 </template>
 
 <script>
-import axios from "axios";
+import Web3 from "web3";
 import Chart from "../components/Chart.vue";
 import init, { total_payout } from "../rewards/xrt_lp_rewards.js";
+
+const web3 = new Web3(
+  "https://mainnet.infura.io/v3/c1ea69ab1e0a4c6aa6a9dcd0641aecc7"
+);
+const contract = new web3.eth.Contract(
+  [
+    {
+      constant: true,
+      inputs: [],
+      name: "totalSupply",
+      outputs: [{ name: "", type: "uint256" }],
+      payable: false,
+      stateMutability: "view",
+      type: "function",
+    },
+    {
+      constant: true,
+      inputs: [{ name: "owner", type: "address" }],
+      name: "balanceOf",
+      outputs: [{ name: "", type: "uint256" }],
+      payable: false,
+      stateMutability: "view",
+      type: "function",
+    },
+  ],
+  "0x7de91b204c1c737bcee6f000aaa6569cf7061cb7"
+);
 
 export default {
   components: {
@@ -68,31 +119,27 @@ export default {
   },
   methods: {
     async loadStaked() {
-      const result = await axios.get(
-        "https://api.etherscan.io/api?module=account&action=tokenbalance&contractaddress=0x7de91b204c1c737bcee6f000aaa6569cf7061cb7&address=0x3185626c14acb9531d19560decb9d3e5e80681b1&tag=latest&apikey=U6AM52QNQZRTE6P4J8RUH1U5JB3I3SUWIZ"
-      );
-      this.staked = Math.round(
-        Number(result.data.result) / 1000000000
-      ).toString();
+      const result = await contract.methods
+        .balanceOf("0x3185626c14acb9531d19560decb9d3e5e80681b1")
+        .call();
+      this.staked = Math.round(Number(result) / 1000000000).toString();
     },
     async loadTotal() {
-      const tokensupply = await axios.get(
-        "https://api.etherscan.io/api?module=stats&action=tokensupply&contractaddress=0x7de91b204c1c737bcee6f000aaa6569cf7061cb7&apikey=U6AM52QNQZRTE6P4J8RUH1U5JB3I3SUWIZ"
-      );
-      const dutchAuction = await axios.get(
-        "https://api.etherscan.io/api?module=account&action=tokenbalance&contractaddress=0x7de91b204c1c737bcee6f000aaa6569cf7061cb7&address=0x86da63b3341924c88baa5adbb2b8f930cc02e586&tag=latest&apikey=U6AM52QNQZRTE6P4J8RUH1U5JB3I3SUWIZ"
-      );
-      const DAO = await axios.get(
-        "https://api.etherscan.io/api?module=account&action=tokenbalance&contractaddress=0x7de91b204c1c737bcee6f000aaa6569cf7061cb7&address=0x28a3d3467a3198d1bb5311836036d53c3c64b999&tag=latest&apikey=U6AM52QNQZRTE6P4J8RUH1U5JB3I3SUWIZ"
-      );
-      const publicAmbix = await axios.get(
-        "https://api.etherscan.io/api?module=account&action=tokenbalance&contractaddress=0x7de91b204c1c737bcee6f000aaa6569cf7061cb7&address=0x06d77d039a6bd049fc9e651b7ecbb2694ac1f96f&tag=latest&apikey=U6AM52QNQZRTE6P4J8RUH1U5JB3I3SUWIZ"
-      );
+      const tokensupply = await contract.methods.totalSupply().call();
+      const dutchAuction = await contract.methods
+        .balanceOf("0x86da63b3341924c88baa5adbb2b8f930cc02e586")
+        .call();
+      const DAO = await contract.methods
+        .balanceOf("0x28a3d3467a3198d1bb5311836036d53c3c64b999")
+        .call();
+      const publicAmbix = await contract.methods
+        .balanceOf("0x06d77d039a6bd049fc9e651b7ecbb2694ac1f96f")
+        .call();
       this.total = Math.round(
-        (Number(tokensupply.data.result) -
-          Number(dutchAuction.data.result) -
-          Number(DAO.data.result) -
-          Number(publicAmbix.data.result)) /
+        (Number(tokensupply) -
+          Number(dutchAuction) -
+          Number(DAO) -
+          Number(publicAmbix)) /
           1000000000
       ).toString();
     },

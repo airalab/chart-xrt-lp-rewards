@@ -63,6 +63,15 @@
           real-time circ, current stake amount and weekly reward estimation.
         </li>
       </ul>
+      <a
+        href="https://docs.google.com/spreadsheets/d/1McClwILWjbWX_KIvGKqtLo0ZseWrWPL20rHjnDKY1YQ/edit#gid=1850083171"
+        target="_blank"
+        class="btn-red"
+        >Stake event distribution</a
+      >
+      <br />
+      <br />
+      <br />
     </div>
   </div>
 </template>
@@ -203,6 +212,7 @@ button {
   margin: 0 auto;
   padding: 10px;
   text-decoration: none;
+  text-align: center;
 }
 .btn-red:hover {
   background-color: #44713f;

@@ -63,12 +63,10 @@
           real-time circ, current stake amount and weekly reward estimation.
         </li>
       </ul>
-      <a
-        href="https://docs.google.com/spreadsheets/d/1McClwILWjbWX_KIvGKqtLo0ZseWrWPL20rHjnDKY1YQ/edit#gid=1850083171"
-        target="_blank"
-        class="btn-red"
-        >Stake event distribution</a
-      >
+      <iframe
+        style="width: 100%; height: 500px;"
+        src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRpSXinniUIYVr37zWXJDG8PXGY9Xpl0iLLCaBE-ZWUBRHO45pw7wPF6_rQThpqKbE_0cleMy57-18R/pubhtml?gid=1850083171&amp;single=true&amp;widget=true&amp;headers=false"
+      ></iframe>
       <br />
       <br />
       <br />
